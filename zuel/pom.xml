@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+  <groupId>com</groupId>
+  <artifactId>zuel</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+  <!-- 父工程进行版本管理 -->
+  
+  <properties>
+        <springframework-version>5.2.4.RELEASE</springframework-version>
+        <spring-version>2.2.5.RELEASE</spring-version>
+        <dubbo-version>2.7.5</dubbo-version>
+        <curator-version>4.2.0</curator-version>
+        <mybatis-springboot-version>2.1.1</mybatis-springboot-version>
+        <jstl-version>1.2</jstl-version>
+        <tomcat-jsp-version>9.0.31</tomcat-jsp-version>
+        <druid-springboot-version>1.1.10</druid-springboot-version>
+        <pagehelper-springboot-version>1.2.13</pagehelper-springboot-version>
+        <page-version>5.1.11</page-version>
+        <fastdfs-version>1.27</fastdfs-version>
+        <common-lang3-version>3.4</common-lang3-version>
+        <httpclient-version>4.5.10</httpclient-version>
+        <jackson-version>2.10.3</jackson-version>
+        <servlet-version>4.0.1</servlet-version>
+        <spring-session-version>2.2.2.RELEASE</spring-session-version>
+        <spring-boot-jpa>2.2.5.RELEASE</spring-boot-jpa>
+        <lombok>1.18.12</lombok>
+        <spring-boot-starter>2.2.5.RELEASE</spring-boot-starter>
+    </properties>
+    <!-- 所有版本都由父项目进行统一管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring-boot管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- 导入springboot包 -->
+            <dependency>
+  				<groupId>org.springframwork.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot-starter}</version>
+  			</dependency>
+            <!-- Spring Session 分布式会话管理 ，在登录时使用 -->
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-data-redis</artifactId>
+                <version>${spring-session-version}</version>
+            </dependency>
+            <!-- dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator-version}</version>
+            </dependency>
+            <!-- mybatis-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-springboot-version}</version>
+            </dependency>
+            <!-- jsp支持 -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-jasper</artifactId>
+                <scope>provided</scope>
+                <version>${tomcat-jsp-version}</version>
+            </dependency>
+            <!-- druid数据库连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-springboot-version}</version>
+            </dependency>
+            <!-- pagehelper 分页-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-springboot-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${page-version}</version>
+            </dependency>
+
+            <!-- fastdfs分布式文件系统 -->
+            <dependency>
+                <groupId>cn.bestwu</groupId>
+                <artifactId>fastdfs-client-java</artifactId>
+                <version>${fastdfs-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${common-lang3-version}</version>
+            </dependency>
+
+            <!-- httpclient-->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient-version}</version>
+            </dependency>
+
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson-version}</version>
+            </dependency>
+            <!-- servlet -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet-version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${springframework-version}</version>
+            </dependency>
+            <!-- jpa -->
+            <dependency>
+            	<groupId>org.springframework.boot</groupId>
+            	<artifactId>spring-boot-starter-data-jpa</artifactId>
+            	<version>${spring-boot-jpa}</version>
+            </dependency>
+            <!-- lombok -->
+            <dependency>
+			    <groupId>org.projectlombok</groupId>
+			    <artifactId>lombok</artifactId>
+			    <version>${lombok}</version>
+			    <scope>provided</scope>
+			</dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+  
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <modules>
+  	<module>zuel-pojo</module>
+  	<module>zuel-dao</module>
+  	<module>zuel-api</module>
+  	<module>zuel-provider</module>
+  	<module>zuel-manage</module>
+  </modules>
+</project>

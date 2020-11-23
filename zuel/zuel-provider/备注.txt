@@ -1,0 +1,4 @@
+zuel-provider 为服务的实现。
+其有两个子项目：
+	manage负责后台的服务实现，其dubbo的端口设为20880
+	portal负责前台的服务实现，其dubbo端口为20881

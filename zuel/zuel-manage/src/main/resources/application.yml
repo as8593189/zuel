@@ -1,0 +1,10 @@
+#定义启动器端口为8080
+server:
+  port: 8080
+  
+#定义jsp相关
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/ 
+      suffix: .jsp

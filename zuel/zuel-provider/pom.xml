@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com</groupId>
+    <artifactId>zuel</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>zuel-provider</artifactId>
+  <packaging>pom</packaging>
+  <!-- 引入实现的依赖 -->
+
+  <dependencies>
+  		<!-- 接口 -->
+  		<dependency>
+  			<groupId>com</groupId>
+  			<artifactId>zuel-dao</artifactId>
+  			<version>1.0</version>
+  		</dependency>
+   		<!--  Spring Boot 核心启动器  -->
+  		<dependency>
+  			<groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+  		</dependency>
+  		 <!--  Dubbo的启动器  -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+        </dependency>
+        <!--  PageHelper分页查询  -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+
+  
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <modules>
+  	<module>zuel-provider-manage</module>
+  	<module>zuel-provider-portal</module>
+  </modules>
+</project>
