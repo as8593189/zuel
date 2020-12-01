@@ -7,12 +7,20 @@
   </parent>
   <artifactId>zuel-provider-manage</artifactId>
   <dependencies>
+  		<!-- 引入实体 -->
+  		<dependency>
+  			<groupId>com</groupId>
+  			<artifactId>zuel-manage</artifactId>
+  			<version>1.0</version>
+
+  		</dependency>
   		<!-- 引入后台接口 -->
   		<dependency>
   			<groupId>com</groupId>
   			<artifactId>zuel-api-manage</artifactId>
   			<version>1.0</version>
   		</dependency>
+  		
   </dependencies>
   <build/>
 </project>

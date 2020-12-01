@@ -12,7 +12,7 @@
   <properties>
         <springframework-version>5.2.4.RELEASE</springframework-version>
         <spring-version>2.2.5.RELEASE</spring-version>
-        <dubbo-version>2.7.5</dubbo-version>
+        <dubbo-version>2.7.8</dubbo-version>
         <curator-version>4.2.0</curator-version>
         <mybatis-springboot-version>2.1.1</mybatis-springboot-version>
         <jstl-version>1.2</jstl-version>
@@ -29,6 +29,7 @@
         <spring-boot-jpa>2.2.5.RELEASE</spring-boot-jpa>
         <lombok>1.18.12</lombok>
         <spring-boot-starter>2.2.5.RELEASE</spring-boot-starter>
+        <zookeeper>0.2</zookeeper>
     </properties>
     <!-- 所有版本都由父项目进行统一管理 -->
     <dependencyManagement>
@@ -155,6 +156,19 @@
 			    <version>${lombok}</version>
 			    <scope>provided</scope>
 			</dependency>
+			<!-- zookeeper -->
+			<dependency>
+			    <groupId>com.101tec</groupId>
+			    <artifactId>zkclient</artifactId>
+			    <version>${zookeeper}</version>
+			    <exclusions>
+	                <exclusion>
+	                    <groupId>org.apache.zookeeper</groupId>
+	                    <artifactId>zookeeper</artifactId>
+	                </exclusion>
+           		 </exclusions>
+			</dependency>
+			
         </dependencies>
     </dependencyManagement>
 
@@ -178,5 +192,6 @@
   	<module>zuel-api</module>
   	<module>zuel-provider</module>
   	<module>zuel-manage</module>
+  	<module>zuel-common</module>
   </modules>
 </project>

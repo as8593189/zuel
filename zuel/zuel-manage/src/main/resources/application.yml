@@ -1,6 +1,6 @@
-#定义启动器端口为8080
+#定义后台管理consumer启动器端口为8001
 server:
-  port: 8080
+  port: 8001
   
 #定义jsp相关
 spring:
@@ -8,3 +8,19 @@ spring:
     view:
       prefix: /WEB-INF/jsp/ 
       suffix: .jsp
+  #非要带上老四条才能运行我是没想到的
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ego?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: a123456
+#定义dubbo consumer配置
+dubbo:
+  application:
+    name: zuel-manage-consumer
+  registry:
+    id: ManagerConsumer
+    address: zookeeper://192.168.10.10:2181
+  protocol:
+    port: 20882
+    name: dubbo  

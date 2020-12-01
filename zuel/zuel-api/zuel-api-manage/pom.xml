@@ -6,6 +6,14 @@
     <version>1.0</version>
   </parent>
   <artifactId>zuel-api-manage</artifactId>
+  <dependencies>
+  		<!-- 引入实体 -->
+  		<dependency>
+  			<groupId>com</groupId>
+  			<artifactId>zuel-pojo</artifactId>
+  			<version>1.0</version>
+  		</dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
