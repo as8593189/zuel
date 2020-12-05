@@ -14,11 +14,13 @@ import com.zuel.pojo.TbManager;
 public interface TbManageDao extends JpaRepository<TbManager,Integer> {
 	
 	/*
-	 * @param name:用户姓名
-	 *@dao:	依据用户名查询用户，自动findby注解
-	 *@return :后台管理员用户
+	 *@param name 用户姓名
+	 *@dao	依据用户名查询用户，自动findby注解
+	 *@return 后台管理员用户
 	 * */
 	
-	TbManager findByName(String name);
+	TbManager findByUserName(String username);
+	
+	
 	
 }

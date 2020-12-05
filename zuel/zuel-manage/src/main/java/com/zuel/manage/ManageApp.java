@@ -2,7 +2,9 @@ package com.zuel.manage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+
 
 /*
  * @author:汪思超
@@ -10,7 +12,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @data:2020.11.23
  * */
 
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+@SpringBootApplication
+@EntityScan(basePackages="com.zuel.pojo")
 public class ManageApp {
 	
 	public static void main(String[] args) {

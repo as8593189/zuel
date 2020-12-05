@@ -74,6 +74,12 @@
        		<artifactId>zuel-common</artifactId>
        		<version>1.0</version>
        </dependency>
+       <!-- 导入接口 -->
+       <dependency>
+       		<groupId>com</groupId>
+       		<artifactId>zuel-api-manage</artifactId>
+       		<version>1.0</version>
+       </dependency>
  </dependencies>
   <build/>
 </project>

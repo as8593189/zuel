@@ -25,17 +25,16 @@ public class ManageSecurityConfig extends WebSecurityConfigurerAdapter {
 									.successForwardUrl("/indexSuccess");
 		//验证配置
 		http.authorizeRequests()
-									.antMatchers("/","/login","/css/**","/js/**").permitAll()
-									.anyRequest().anonymous();
+										.antMatchers("/", "/login", "/css/**", "/js/**").permitAll()
+										.anyRequest().authenticated();
 		//关闭csrf
 		http.csrf().disable();
 	}
 	
 	//使用散列加密算法
 	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-		
-	}
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 	
 }

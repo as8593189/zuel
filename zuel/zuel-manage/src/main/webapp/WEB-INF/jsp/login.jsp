@@ -41,7 +41,7 @@
 
         $.post("/login",{"username":username,"password":password},function (data) {
 			if(data.status==200){
-				location.href="/main";
+				location.href="/index";
 			}else{
 				$.messager.alert("系统消息","登录失败");
 			}

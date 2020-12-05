@@ -41,12 +41,12 @@ public class TbManager implements Serializable {
 	@Column(name="username")
 	private String username;
 	
-	public String getUserName() {
+	public String getusername() {
 		return username;
 	}
 	
-	public void setUserName(String userName) {
-		this.username=userName;
+	public void setusername(String username) {
+		this.username=username;
 	}
 	
 	@Column(name="password")

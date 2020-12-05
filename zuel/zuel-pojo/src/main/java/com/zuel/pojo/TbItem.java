@@ -53,7 +53,7 @@ public class TbItem implements Serializable {
     private Long cid;
 
     @Column(name="status")
-    private Byte status;
+    private int status;
 
     @Column(name="created")
     private Date created;

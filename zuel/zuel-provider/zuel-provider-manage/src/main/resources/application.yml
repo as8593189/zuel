@@ -12,9 +12,9 @@ dubbo:
   protocol:
     port: 20881
     name: dubbo
-  scan:
-    base-packages:
-    - zuel-api-manage
+#  scan:
+#   base-packages:
+#    - zuel-api-manage
 
 #启用dao中的配置文件
 spring:

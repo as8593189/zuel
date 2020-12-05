@@ -1,9 +1,8 @@
-package com.zuel.manage.controller;
+package com.zuel.manage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zuel.common.vo.ZuelResult;
@@ -22,6 +21,7 @@ public class PassportController {
 	 * */
 	@GetMapping(value= {"/","/login"})
 	public String toLogin() {
+		System.out.println("我日你奶奶的傻逼dubbo");
 		return "login";
 
 	}
@@ -40,6 +40,7 @@ public class PassportController {
 	@PostMapping(value= {"/indexSuccess"})
 	@ResponseBody
 	public ZuelResult toIndexSuccess() {
+		System.out.println("已经是可以访问的了");
 		return ZuelResult.ok();
 		
 		

@@ -1,6 +1,7 @@
 package com.zuel.manage.authentication;
 
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,7 @@ public class ManageDetialService implements UserDetailsService {
 	@DubboReference
 	private TbManageService managerService;
 	
+	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
@@ -30,7 +32,7 @@ public class ManageDetialService implements UserDetailsService {
 		if (manager==null) {
 			throw new UsernameNotFoundException("用户名不存在");
 		}
-		return new User(manager.getUserName(), manager.getPassword(), 
+		return new User(manager.getusername(), manager.getPassword(), 
 				AuthorityUtils.createAuthorityList("未授权"));
 	}
 

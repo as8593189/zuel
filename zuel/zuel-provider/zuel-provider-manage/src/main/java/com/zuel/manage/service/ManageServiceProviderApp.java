@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date:2020.11.28
  * */
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages="com.zuel.dao")
 @EnableDubbo
 @MapperScan(basePackages="com.zuel.mapper")
 public class ManageServiceProviderApp {
