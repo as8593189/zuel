@@ -14,15 +14,15 @@ public class ZuelItemStatus {
 	public static byte errorItem=0;
 	
 	/*
-	 * 商品上架(默认)
+	 * 商品下架
 	 * */
-	public static byte downItem=1;
+	public static byte downItem=2;
 	
 	
 	/*
-	 * 商品下架
+	 * 商品上架
 	 * */
-	public static byte UpItem=2;
+	public static byte UpItem=1;
 	
 	/*
 	 * 商品被删除

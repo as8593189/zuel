@@ -19,7 +19,7 @@ public interface TbManageDao extends JpaRepository<TbManager,Integer> {
 	 *@return 后台管理员用户
 	 * */
 	
-	TbManager findByUserName(String username);
+	TbManager findByUsername(String username);
 	
 	
 	

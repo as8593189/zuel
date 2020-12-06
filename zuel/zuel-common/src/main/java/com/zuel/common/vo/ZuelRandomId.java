@@ -4,7 +4,7 @@ import java.util.Random;
 
 /*
  * @author:汪思超
- * @class:获得一个随机ID
+ * @class:获得一个随机ID（不好用，已停用）
  * @date:2020.12.5
  * */
 
