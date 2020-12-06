@@ -3,17 +3,22 @@ package com.zuel.manage.service.impl;
 import java.util.Date;
 import java.util.Optional;
 
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.zuel.common.vo.EasyUIDatagrid;
+import com.zuel.common.vo.ZuelItemStatus;
 import com.zuel.common.vo.ZuelPageResult;
 import com.zuel.common.vo.ZuelRandomId;
 import com.zuel.common.vo.ZuelResult;
+import com.zuel.exception.ServiceException;
 import com.zuel.manage.dao.TbItemDao;
 import com.zuel.manage.service.TbItemManageService;
+import com.zuel.manage.service.TbItemStatusModify;
 import com.zuel.pojo.TbItem;
 
 /*
@@ -28,6 +33,9 @@ public class TbItemServiceImpl implements TbItemManageService{
 	
 	@Autowired
 	private TbItemDao tbItemdao;
+	
+	@DubboReference
+	private TbItemStatusModify statusModify;
 
 	@Override
 	public ZuelPageResult<TbItem> getItems(int page, int size, String search) {
@@ -86,7 +94,10 @@ public class TbItemServiceImpl implements TbItemManageService{
 		if (!tbitemOptional.isPresent()) {
 			return ZuelResult.error();
 		}
-		tbItemdao.deleteById(id);
+		//tbItemdao.deleteById(id);
+		//不直接删除，变成标记删除
+		tbitemOptional.get().setStatus(3);
+		tbItemdao.save(tbitemOptional.get());
 		return ZuelResult.ok();
 	}
 
@@ -97,7 +108,7 @@ public class TbItemServiceImpl implements TbItemManageService{
 			return ZuelResult.error();
 		}
 		TbItem item=tbitemOptional.get();
-		item.setStatus(0);
+		item.setStatus(1);
 		tbItemdao.save(item);
 		return ZuelResult.ok();
 	}
@@ -110,9 +121,58 @@ public class TbItemServiceImpl implements TbItemManageService{
 			return ZuelResult.error();
 		}
 		TbItem item=tbitemOptional.get();
-		item.setStatus(1);
+		item.setStatus(2);
 		tbItemdao.save(item);
 		return ZuelResult.ok();
+	}
+
+	@Override
+	public EasyUIDatagrid<TbItem> getItemsByPage(Integer page, Integer rows) {
+		// TODO Auto-generated method stub
+		//适配前台UI页面
+		Pageable pageable=PageRequest.of(page, rows);
+		Page<TbItem> itemPage=tbItemdao.findAll( pageable);
+		return new EasyUIDatagrid<TbItem>(itemPage.getTotalElements(), itemPage.getContent());
+	}
+
+	@Override
+	public ZuelResult deleteItemByStatus(Long[] ids) throws ServiceException {
+		// TODO Auto-generated method stub
+		try {
+			statusModify.modifyStatus(ids,ZuelItemStatus.DeteleItem);
+			return ZuelResult.ok();
+		} catch (ServiceException e) {
+			// TODO: handle exception
+			e.getStackTrace();
+			throw new ServiceException("后台删除商品失效");
+		}
+		
+	}
+
+	@Override
+	public ZuelResult underItem2(Long[] ids) throws ServiceException {
+		// TODO Auto-generated method stub
+		try {
+			statusModify.modifyStatus(ids,ZuelItemStatus.downItem);
+			return ZuelResult.ok();
+		} catch (ServiceException e) {
+			// TODO: handle exception
+			e.getStackTrace();
+			throw new ServiceException("后台下架商品失效");
+		}
+	}
+
+	@Override
+	public ZuelResult upItem2(Long[] ids)  throws ServiceException{
+		// TODO Auto-generated method stub
+		try {
+			statusModify.modifyStatus(ids,ZuelItemStatus.UpItem);
+			return ZuelResult.ok();
+		} catch (ServiceException e) {
+			// TODO: handle exception
+			e.getStackTrace();
+			throw new ServiceException("后台上架商品失效");
+		}
 	}
 
 	

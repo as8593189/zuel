@@ -20,7 +20,12 @@
   			<artifactId>zuel-api-manage</artifactId>
   			<version>1.0</version>
   		</dependency>
-  		
+  		<!-- 引入工具类 -->
+  		<dependency>
+  			<groupId>com</groupId>
+  			<artifactId>zuel-common</artifactId>
+  			<version>1.0</version>
+  		</dependency>
   </dependencies>
   <build/>
 </project>
