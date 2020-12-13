@@ -2,6 +2,7 @@ package com.zuel.manage.Controller.Impl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import com.zuel.common.vo.ZuelPageResult;
 import com.zuel.common.vo.ZuelResult;
 import com.zuel.exception.ServiceException;
 import com.zuel.manage.Controller.TbItemController;
+import com.zuel.manage.service.TbItemDescService;
 import com.zuel.manage.service.TbItemManageService;
 import com.zuel.pojo.TbItem;
 
@@ -25,6 +27,9 @@ public class TbItemControllerImpl implements TbItemController {
 
 	@Autowired
 	private TbItemManageService service;
+	
+	@Autowired 
+	private TbItemDescService deseService;
 	
 	@Override
 	@RequestMapping(value=ZuelControllerValue.Manage+"getItems")
@@ -98,4 +103,20 @@ public class TbItemControllerImpl implements TbItemController {
 		return service.upItem2(ids);
 	}
 
+	@Override
+	@RequestMapping(value="/rest/item/query/item/desc/{itemId}")
+	public ZuelResult getTbitemDescByKey(@PathVariable("itemId") Long itemKey) throws ServiceException {
+		// TODO Auto-generated method stub
+		return deseService.getTbitemDescByKey(itemKey);
+	}
+
+	@Override
+	@RequestMapping(value="/item/save")
+	public ZuelResult saveItem(TbItem item, String desc) throws ServiceException {
+		// TODO Auto-generated method stub
+		return service.saveItem(item, desc);
+	}
+
+
+	
 }

@@ -81,4 +81,11 @@ public interface TbItemManageService  {
 	 * 
 	 * */
 	ZuelResult upItem2(Long[] ids) throws ServiceException;
+	
+	/**
+	 * 	商品保存api(分布式)
+	 * @throws ServiceException 
+	 * 
+	 * */
+	ZuelResult saveItem(TbItem item,String desc) throws ServiceException;
 }

@@ -1,0 +1,4 @@
+# 图片相关配置信息
+zuel:
+  picture:
+    nginxServer: http://192.168.10.10:8888/

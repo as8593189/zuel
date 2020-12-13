@@ -18,8 +18,10 @@ import com.zuel.common.vo.ZuelResult;
 import com.zuel.exception.ServiceException;
 import com.zuel.manage.dao.TbItemDao;
 import com.zuel.manage.service.TbItemManageService;
+import com.zuel.manage.service.TbItemSaveProviderService;
 import com.zuel.manage.service.TbItemStatusModify;
 import com.zuel.pojo.TbItem;
+import com.zuel.pojo.TbItemDesc;
 
 /*
  * @author:汪思超
@@ -37,6 +39,9 @@ public class TbItemServiceImpl implements TbItemManageService{
 	@DubboReference
 	private TbItemStatusModify statusModify;
 
+	@DubboReference
+	private TbItemSaveProviderService saveService;
+	
 	@Override
 	public ZuelPageResult<TbItem> getItems(int page, int size, String search) {
 		// TODO Auto-generated method stub
@@ -173,6 +178,24 @@ public class TbItemServiceImpl implements TbItemManageService{
 			e.getStackTrace();
 			throw new ServiceException("后台上架商品失效");
 		}
+	}
+
+	@Override
+	public ZuelResult saveItem(TbItem item, String desc) throws ServiceException {
+		TbItemDesc itemDesc = new TbItemDesc();
+		Date now = new Date(System.currentTimeMillis()); 
+		if (null == item.getId()) { 
+		    item.setCreated(now); 
+		    itemDesc.setCreated(now); 
+		}
+		item.setUpdated(now); 
+		itemDesc.setItemDesc(desc); 
+		itemDesc.setUpdated(now); 
+		boolean isSaved = saveService.saveItem(item, itemDesc);
+		if(isSaved){
+		    return ZuelResult.ok();
+		}
+        return ZuelResult.error();
 	}
 
 	

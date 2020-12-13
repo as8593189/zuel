@@ -21,7 +21,7 @@ public class PassportController {
 	 * */
 	@GetMapping(value= {"/","/login"})
 	public String toLogin() {
-		System.out.println("我日你奶奶的傻逼dubbo");
+		System.out.println("已经成功进入了dubbo");
 		return "login";
 
 	}
