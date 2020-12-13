@@ -8,7 +8,7 @@
 	        <tr>
 	            <td>商品类目:</td>
 	            <td>
-	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat">选择类目</a>
+	            	<a href="javascript:void(0)" class="easyui-linkbutton selectItemCat" id="addItemSelectItemCat">选择类目</a>
 	            	<input type="hidden" name="cid" style="width: 280px;"></input>
 	            </td>
 	        </tr>
@@ -121,5 +121,9 @@
 	function clearForm(){
 		$('#itemAddForm').form('reset');
 		itemAddEditor.html('');
+		// 把商品类目数据重置
+		$("#addItemSelectItemCat").next().text("").attr("cid","");
+		// 清空图片的缩略图
+		$("#itemAddForm").find(".pics ul").empty();
 	}
 </script>

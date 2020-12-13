@@ -112,9 +112,9 @@ public class TbItemControllerImpl implements TbItemController {
 
 	@Override
 	@RequestMapping(value="/item/save")
-	public ZuelResult saveItem(TbItem item, String desc) throws ServiceException {
+	public ZuelResult saveItem(TbItem item, String desc, String itemParams, Long itemParamId) throws ServiceException {
 		// TODO Auto-generated method stub
-		return service.saveItem(item, desc);
+		return service.saveItem(item, desc,itemParams,itemParamId);
 	}
 
 

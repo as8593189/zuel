@@ -57,7 +57,7 @@
         			//回显数据
         			var data = $("#itemList").datagrid("getSelections")[0];
         			data.priceView = EGO.formatPrice(data.price);
-        			$("#itemeEditForm").form("load",data);
+        			$("#itemEditForm").form("load",data);
         			
         			// 加载商品描述
         			$.getJSON('/rest/item/query/item/desc/'+data.id,function(_data){
@@ -70,9 +70,9 @@
         			//加载商品规格
         			$.getJSON('/rest/item/param/item/query/'+data.id,function(_data){
         				if(_data && _data.status == 200 && _data.data && _data.data.paramData){
-        					$("#itemeEditForm .params").show();
-        					$("#itemeEditForm [name=itemParams]").val(_data.data.paramData);
-        					$("#itemeEditForm [name=itemParamId]").val(_data.data.id);
+        					$("#itemEditForm .params").show();
+        					$("#itemEditForm [name=itemParams]").val(_data.data.paramData);
+        					$("#itemEditForm [name=itemParamId]").val(_data.data.id);
         					
         					//回显商品规格
         					 var paramData = JSON.parse(_data.data.paramData);
@@ -88,10 +88,10 @@
         							 html+="<tr><td class=\"param\"><span>"+ps.k+"</span>: </td><td><input autocomplete=\"off\" type=\"text\" value='"+ps.v+"'/></td></tr>";
         						 }
         						 
-        						 html+="</li></table>";
+        						 html+="</table></li>";
         					 }
         					 html+= "</ul>";
-        					 $("#itemeEditForm .params td").eq(1).html(html);
+        					 $("#itemEditForm .params td").eq(1).html(html);
         				}
         			});
         			

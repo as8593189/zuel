@@ -23,6 +23,13 @@ public class ZuelResult implements Serializable {
 	private int status;
 
 	/**
+	 * @param:data  附带保存的数据
+	 */
+	private Object data;
+	
+	
+	
+	/**
 	 * 带参构造器
 	 */
 	public ZuelResult(int status) {
@@ -45,6 +52,10 @@ public class ZuelResult implements Serializable {
 		return new ZuelResult(200);
 	}
 	
+	public static ZuelResult ok(Object data) {
+		return new ZuelResult(200,data);
+	}
+	
 	/**
 	 * @param:status状态码
 	 * @method:失败的返回方法
@@ -53,11 +64,25 @@ public class ZuelResult implements Serializable {
 		return new ZuelResult(500);
 	}
 
+	public static ZuelResult error(Object data) {
+		return new ZuelResult(500,data);
+	}
+	
 	/**
 	 * 得到当前状态码
 	 */
 	public int getStatus() {
 		return status;
+	}
+
+	public ZuelResult(int status, Object data) {
+		super();
+		this.status = status;
+		this.data = data;
+	}
+
+	public Object getData() {
+		return data;
 	}
 
 	

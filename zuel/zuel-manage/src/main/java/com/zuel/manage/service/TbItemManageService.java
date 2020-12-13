@@ -87,5 +87,5 @@ public interface TbItemManageService  {
 	 * @throws ServiceException 
 	 * 
 	 * */
-	ZuelResult saveItem(TbItem item,String desc) throws ServiceException;
+	ZuelResult saveItem(TbItem item,String desc,String itemParams, Long itemParamId) throws ServiceException;
 }

@@ -22,6 +22,7 @@ import com.zuel.manage.service.TbItemSaveProviderService;
 import com.zuel.manage.service.TbItemStatusModify;
 import com.zuel.pojo.TbItem;
 import com.zuel.pojo.TbItemDesc;
+import com.zuel.pojo.TbItemParamItem;
 
 /*
  * @author:汪思超
@@ -181,16 +182,21 @@ public class TbItemServiceImpl implements TbItemManageService{
 	}
 
 	@Override
-	public ZuelResult saveItem(TbItem item, String desc) throws ServiceException {
+	public ZuelResult saveItem(TbItem item, String desc,String itemParams, Long itemParamId) throws ServiceException {
 		TbItemDesc itemDesc = new TbItemDesc();
+		TbItemParamItem itemParamItem = new TbItemParamItem();
 		Date now = new Date(System.currentTimeMillis()); 
 		if (null == item.getId()) { 
 		    item.setCreated(now); 
 		    itemDesc.setCreated(now); 
+		    itemParamItem.setCreated(now);
 		}
 		item.setUpdated(now); 
 		itemDesc.setItemDesc(desc); 
 		itemDesc.setUpdated(now); 
+		itemParamItem.setId(itemParamId);
+        itemParamItem.setParamData(itemParams); 
+        itemParamItem.setUpdated(now);
 		boolean isSaved = saveService.saveItem(item, itemDesc);
 		if(isSaved){
 		    return ZuelResult.ok();
