@@ -3,7 +3,7 @@
     <div class="easyui-layout" data-options="fit:true">
         <div data-options="region:'west',split:false" style="width:250px;padding:5px">
             <ul id="contentCategoryTree" class="easyui-tree" data-options="url:'/content/category/list',animate: true,method : 'GET'">
-            </ul>
+		</ul>
         </div>
         <div data-options="region:'center'" style="padding:5px">
             <table class="easyui-datagrid" id="contentList" data-options="toolbar:contentListToolbar,singleSelect:false,collapsible:true,pagination:true,method:'get',pageSize:20,url:'/content/query/list',queryParams:{categoryId:0}">
@@ -49,7 +49,8 @@ var contentListToolbar = [{
     		return ;
     	}
     	TT.createWindow({
-			url : "/content-add"
+			url : "/content-add",
+			title : "新增内容"
 		}); 
     }
 },{
@@ -67,6 +68,7 @@ var contentListToolbar = [{
     	}
 		TT.createWindow({
 			url : "/content-edit",
+			title : "编辑内容",
 			onLoad : function(){
 				var data = $("#contentList").datagrid("getSelections")[0];
 				$("#contentEditForm").form("load",data);
