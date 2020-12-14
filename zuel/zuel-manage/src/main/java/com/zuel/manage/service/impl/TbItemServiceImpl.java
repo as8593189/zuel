@@ -197,7 +197,7 @@ public class TbItemServiceImpl implements TbItemManageService{
 		itemParamItem.setId(itemParamId);
         itemParamItem.setParamData(itemParams); 
         itemParamItem.setUpdated(now);
-		boolean isSaved = saveService.saveItem(item, itemDesc);
+        boolean isSaved = this.saveService.saveItem(item, itemDesc, itemParamItem);
 		if(isSaved){
 		    return ZuelResult.ok();
 		}
