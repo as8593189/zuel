@@ -29,7 +29,7 @@ public class PicUpLoadImpl  implements PicUploadService{
             // 上传图片
             String[] uploadResult =
                     ZuelFileupLoad.uploadFile(uploadFile.getInputStream(), uploadFile.getOriginalFilename());
-            
+
             // 处理返回结果
             result.put("error", 0);
             result.put("url", nginxServer + uploadResult[0] + "/" + uploadResult[1]);

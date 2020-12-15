@@ -93,6 +93,7 @@ var TT = EGO = {
 							var imgArray = [];
 							KindEditor.each(urlList, function(i, data) {
 								imgArray.push(data.url);
+								form.find(".pics ul").empty();// 清空原有的图片缩略图。
 								form.find(".pics ul").append("<li><a href='"+data.url+"' target='_blank'><img src='"+data.url+"' width='80' height='50' /></a></li>");
 							});
 							form.find("[name=image]").val(imgArray.join(","));
@@ -207,7 +208,7 @@ var TT = EGO = {
 						 html+="<tr><td class=\"param\"><span>"+ps+"</span>: </td><td><input autocomplete=\"off\" type=\"text\"/></td></tr>";
 					 }
 					 
-					 html+="</li></table>";
+					 html+="</table></li>";
 				 }
 				 html+= "</ul>";
 				 $("#"+formId+" .params td").eq(1).html(html);

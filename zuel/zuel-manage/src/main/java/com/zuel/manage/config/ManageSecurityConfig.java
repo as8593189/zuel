@@ -23,6 +23,8 @@ public class ManageSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin().loginProcessingUrl("/login")
 									.loginPage("/login")
 									.successForwardUrl("/indexSuccess");
+		//禁用frame相关权限
+		http.headers().frameOptions().disable();
 		//验证配置
 		http.authorizeRequests()
 										.antMatchers("/", "/login", "/css/**", "/js/**").permitAll()

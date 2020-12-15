@@ -1,7 +1,6 @@
 package com.zuel.manage.authentication;
 
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

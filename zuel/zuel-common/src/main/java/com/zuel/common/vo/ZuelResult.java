@@ -27,7 +27,10 @@ public class ZuelResult implements Serializable {
 	 */
 	private Object data;
 	
-	
+	/**
+	 * @param:msg  消息
+	 */
+	private String msg;
 	
 	/**
 	 * 带参构造器
@@ -56,6 +59,10 @@ public class ZuelResult implements Serializable {
 		return new ZuelResult(200,data);
 	}
 	
+	public static ZuelResult ok(Object data,String msg) {
+		return new ZuelResult(200,data,msg);
+	}
+	
 	/**
 	 * @param:status状态码
 	 * @method:失败的返回方法
@@ -66,6 +73,10 @@ public class ZuelResult implements Serializable {
 
 	public static ZuelResult error(Object data) {
 		return new ZuelResult(500,data);
+	}
+	
+	public static ZuelResult error(Object data,String msg) {
+		return new ZuelResult(500,data,msg);
 	}
 	
 	/**
@@ -83,6 +94,17 @@ public class ZuelResult implements Serializable {
 
 	public Object getData() {
 		return data;
+	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public ZuelResult(int status, Object data, String msg) {
+		super();
+		this.status = status;
+		this.data = data;
+		this.msg = msg;
 	}
 
 	
