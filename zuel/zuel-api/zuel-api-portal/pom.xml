@@ -6,6 +6,15 @@
     <version>1.0</version>
   </parent>
   <artifactId>zuel-api-portal</artifactId>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>com</groupId>
+  		<artifactId>zuel-pojo</artifactId>
+  		<version>1.0</version>
+  	</dependency>
+  
+  </dependencies>
   <build>
    
   </build>

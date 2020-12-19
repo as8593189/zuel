@@ -1,0 +1,12 @@
+server:
+  port: 8081
+dubbo:
+  registry:
+    address: zookeeper://192.168.10.10:2181
+  application:
+    name: zuel-item-consumer
+    
+    
+spring:
+  profiles:
+    active: redis

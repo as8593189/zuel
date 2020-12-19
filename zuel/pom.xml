@@ -185,5 +185,8 @@
   	<module>zuel-provider</module>
   	<module>zuel-manage</module>
   	<module>zuel-common</module>
+  	<module>zuel-portal</module>
+  	<module>zuel-redis</module>
+  	<module>zuel-item</module>
   </modules>
 </project>
