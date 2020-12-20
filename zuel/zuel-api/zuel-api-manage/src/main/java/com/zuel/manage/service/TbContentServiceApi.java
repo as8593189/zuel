@@ -18,4 +18,6 @@ public interface TbContentServiceApi {
     boolean saveContent(TbContent content) throws ServiceException;
 
     boolean removeContent(Long[] ids) throws ServiceException;
+    
+    TbContent getContentById(Long id);
 }

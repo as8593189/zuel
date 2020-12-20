@@ -188,5 +188,8 @@
   	<module>zuel-portal</module>
   	<module>zuel-redis</module>
   	<module>zuel-item</module>
+  	<module>zuel-message</module>
+  	<module>zuel-message-provider</module>
+  	<module>zuel-message-consumer</module>
   </modules>
 </project>

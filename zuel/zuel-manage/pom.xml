@@ -80,6 +80,12 @@
        		<artifactId>zuel-api-manage</artifactId>
        		<version>1.0</version>
        </dependency>
+       <!-- 发送消息工程 -->
+        <dependency>
+            <groupId>com</groupId>
+            <artifactId>zuel-message-provider</artifactId>
+            <version>1.0</version>
+        </dependency>
  </dependencies>
   <build/>
 </project>

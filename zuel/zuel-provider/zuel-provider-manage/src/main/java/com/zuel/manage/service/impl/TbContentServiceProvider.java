@@ -77,4 +77,10 @@ public class TbContentServiceProvider implements TbContentServiceApi {
         throw new ServiceException("删除内容发生异常");
 	}
 
+	@Override
+	public TbContent getContentById(Long id) {
+		// TODO Auto-generated method stub
+		return tbContentMapper.selectByPrimaryKey(id);
+	}
+
 }

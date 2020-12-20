@@ -1,7 +1,5 @@
 package com.zuel.item.config;
 
-import java.time.Duration;
-
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,39 +10,42 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.time.Duration;
+
 /*
  * 
  * @author:汪思超
- * @app:商品系统redis配置类
+ * @class:redis配置（为什么直接继承会序列化失败？不解）
  * @date:2020.12.18
  * */
 
 @Configuration
 public class RedisCacheConfiguration {
-
-	@Bean
-	public CacheManager cacheManager(RedisConnectionFactory factory) {
-		org.springframework.data.redis.cache.RedisCacheConfiguration config =
+	
+    @Bean
+    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory){
+        org.springframework.data.redis.cache.RedisCacheConfiguration config =
                 org.springframework.data.redis.cache.RedisCacheConfiguration.defaultCacheConfig();
-		config.serializeKeysWith(
-                RedisSerializationContext.SerializationPair.fromSerializer(
-                        new StringRedisSerializer()
+        config
+                .serializeKeysWith(
+                        RedisSerializationContext.SerializationPair.fromSerializer(
+                                new StringRedisSerializer()
+                        )
                 )
-        )
-        .serializeValuesWith(
-                RedisSerializationContext.SerializationPair.fromSerializer(
-                        new GenericJackson2JsonRedisSerializer()
+                .serializeValuesWith(
+                        RedisSerializationContext.SerializationPair.fromSerializer(
+                                new GenericJackson2JsonRedisSerializer()
+                        )
                 )
-        )
-        .entryTtl(Duration.ofMinutes(30L))
-        .disableCachingNullValues();
-		
-		return RedisCacheManager.builder(
-						RedisCacheWriter.nonLockingRedisCacheWriter(factory))
-				.cacheDefaults(config)
-				.build();
-		
-		
-		
-	}
+                .entryTtl(Duration.ofMinutes(30L))
+                .disableCachingNullValues();
+        return RedisCacheManager
+                .builder(
+                        RedisCacheWriter.nonLockingRedisCacheWriter( 
+                                redisConnectionFactory
+                        )
+                )
+                .cacheDefaults(config)
+                .build();
+    }
 }

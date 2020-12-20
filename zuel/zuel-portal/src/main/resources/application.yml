@@ -6,9 +6,14 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+  profiles:
+    active: content,picEnv,redis
 
 dubbo:
   application:
     name: zuel-portal-consumer
   registry:
     address: zookeeper://192.168.10.10:2181
+  protocol:
+    port: 20884
+    name: dubbo 

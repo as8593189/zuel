@@ -1,0 +1,15 @@
+spring:
+  rabbitmq:
+    host: 192.168.10.11
+    port: 5672 
+    username: root
+    password: a123456
+    virtual-host: / 
+
+zuel:
+  message:
+    content:
+      sync:
+        exchange: zuel_content_sync_ex
+        routingKey: content_rk
+        queueName: zuel_content_sync_queue

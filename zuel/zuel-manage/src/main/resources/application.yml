@@ -10,7 +10,7 @@ spring:
       suffix: .jsp
 #激活common中的配置文件
   profiles:
-    active: picEnv
+    active: picEnv,mq
   #非要带上老四条才能运行我是没想到的
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
