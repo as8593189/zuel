@@ -5,7 +5,7 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.zuel.message.provider.TbContentMessagePublisher;
+import com.zuel.message.provider.TbMessagePublisher;
 
 /*
  * 
@@ -19,10 +19,10 @@ import com.zuel.message.provider.TbContentMessagePublisher;
 public class MessageConfiguration {
 
     @Bean
-    public TbContentMessagePublisher contentMessagePublisher(AmqpTemplate template){
-        TbContentMessagePublisher contentMessagePublisher =
-                new TbContentMessagePublisher();
-        contentMessagePublisher.setAmpTemplate(template);
+    public TbMessagePublisher contentMessagePublisher(AmqpTemplate template){
+        TbMessagePublisher contentMessagePublisher =
+                new TbMessagePublisher();
+        contentMessagePublisher.setTemplate(template);
         return contentMessagePublisher;
     }
 }

@@ -1,5 +1,6 @@
 package com.zuel.mapper;
 
+import com.zuel.common.vo.SearchItem;
 import com.zuel.pojo.TbItem;
 import com.zuel.pojo.TbItemExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface TbItemMapper {
     int updateByPrimaryKeySelective(TbItem record);
 
     int updateByPrimaryKey(TbItem record);
+    
+    List<SearchItem> selectByIds(@Param("ids") Long[] ids);
 }

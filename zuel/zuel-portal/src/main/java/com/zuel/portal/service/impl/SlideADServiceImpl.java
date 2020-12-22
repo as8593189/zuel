@@ -36,9 +36,9 @@ public class SlideADServiceImpl implements SlideADService {
 		 List<TbContent> list = this.tbContentServiceAPI.getContentByCategory(slideAdContentCategoryId);
 	        // 定义需要的结果集合
 	        List<ZuelSlideAdVo> resultList = new ArrayList<>();
-	        // 创建EgoSlideAD类型的构建器
+	        // 创建zuelSlideAD类型的构建器
 	        ZuelSlideAdVo.Builder builder = new ZuelSlideAdVo.Builder();
-	        // 把查询的TbContent类型对象，转换成EgoSlideAD类型的对象。
+	        // 把查询的TbContent类型对象，转换成zuelSlideAD类型的对象。
 	        for(TbContent content : list){
 	        	ZuelSlideAdVo item = builder.build();
 	            item.setSrc(content.getPic());

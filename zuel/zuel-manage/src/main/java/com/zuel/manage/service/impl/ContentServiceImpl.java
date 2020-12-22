@@ -15,7 +15,7 @@ import com.zuel.exception.ServiceException;
 import com.zuel.manage.service.ContentService;
 import com.zuel.manage.service.TbContentServiceApi;
 import com.zuel.message.ContentMessage;
-import com.zuel.message.provider.TbContentMessagePublisher;
+import com.zuel.message.provider.TbMessagePublisher;
 import com.zuel.pojo.TbContent;
 
 /*
@@ -31,7 +31,7 @@ public class ContentServiceImpl implements ContentService {
 	private TbContentServiceApi service;
 
 	@Autowired
-    private TbContentMessagePublisher publisher;
+    private TbMessagePublisher publisher;
 	
 	@Value("${zuel.message.content.sync.exchange}")
     private String exchange;

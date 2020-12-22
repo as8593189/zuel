@@ -1,0 +1,10 @@
+server:
+  port: 8083
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  data:
+    solr:
+      host: http://192.168.10.10:8983/solr

@@ -1,6 +1,10 @@
 package com.zuel.manage.service;
 
+import com.zuel.common.vo.EasyUIDatagrid;
 import com.zuel.exception.ServiceException;
+import com.zuel.pojo.TbItem;
+import com.zuel.pojo.TbItemDesc;
+import com.zuel.pojo.TbItemParamItem;
 
 /*
  * 
@@ -10,5 +14,10 @@ import com.zuel.exception.ServiceException;
  * */
 
 public interface TbItemStatusModify{
+	
+	EasyUIDatagrid<TbItem> getTbItemsByPage(int page, int rows);
+	
 	public boolean modifyStatus (Long[] ids, Byte status) throws ServiceException;
+	
+	 boolean saveItem(TbItem item, TbItemDesc itemDesc, TbItemParamItem itemParamItem) throws ServiceException;
 }

@@ -9,7 +9,7 @@ import java.util.Objects;
  * @date:2020.12.19
  * */
 
-public class ContentMessage implements Serializable{
+public class ContentMessage extends ZuelMessage implements Serializable{
 
 	/**
 	 * 序列化

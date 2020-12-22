@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,8 @@ import com.zuel.manage.dao.TbItemDao;
 import com.zuel.manage.service.TbItemManageService;
 import com.zuel.manage.service.TbItemSaveProviderService;
 import com.zuel.manage.service.TbItemStatusModify;
+import com.zuel.message.ItemMessage;
+import com.zuel.message.provider.TbMessagePublisher;
 import com.zuel.pojo.TbItem;
 import com.zuel.pojo.TbItemDesc;
 import com.zuel.pojo.TbItemParamItem;
@@ -42,6 +45,16 @@ public class TbItemServiceImpl implements TbItemManageService{
 
 	@DubboReference
 	private TbItemSaveProviderService saveService;
+	
+	@Autowired
+	private TbMessagePublisher publisher;
+	
+	@Value("${zuel.message.item.sync.exchange}")
+    private String exchange;
+	
+    @Value("${zuel.message.item.sync.routingKey}")
+    private String routingKey;
+
 	
 	@Override
 	public ZuelPageResult<TbItem> getItems(int page, int size, String search) {
@@ -145,7 +158,15 @@ public class TbItemServiceImpl implements TbItemManageService{
 	public ZuelResult deleteItemByStatus(Long[] ids) throws ServiceException {
 		// TODO Auto-generated method stub
 		try {
-			statusModify.modifyStatus(ids,ZuelItemStatus.DeteleItem);
+			boolean isModified = statusModify.modifyStatus(ids,ZuelItemStatus.DeteleItem);
+			if (isModified) {
+                // 发送消息，同步solr
+                ItemMessage itemMessage = new ItemMessage();
+                itemMessage.setFlag("delete");
+                itemMessage.addId(ids);
+               publisher.sendMessage(exchange, routingKey, itemMessage);
+                return ZuelResult.ok();
+            }
 			return ZuelResult.ok();
 		} catch (ServiceException e) {
 			// TODO: handle exception
@@ -159,26 +180,40 @@ public class TbItemServiceImpl implements TbItemManageService{
 	public ZuelResult underItem2(Long[] ids) throws ServiceException {
 		// TODO Auto-generated method stub
 		try {
-			statusModify.modifyStatus(ids,ZuelItemStatus.downItem);
-			return ZuelResult.ok();
+			boolean isModified = statusModify.modifyStatus(ids,ZuelItemStatus.downItem);
+			if (isModified) { 
+                ItemMessage itemMessage = new ItemMessage();
+                itemMessage.setFlag("delete");
+                itemMessage.addId(ids);
+                publisher.sendMessage(exchange, routingKey, itemMessage);
+                return ZuelResult.ok();
+            }
 		} catch (ServiceException e) {
 			// TODO: handle exception
 			e.getStackTrace();
 			throw new ServiceException("后台下架商品失效");
 		}
+		return ZuelResult.error();
 	}
 
 	@Override
 	public ZuelResult upItem2(Long[] ids)  throws ServiceException{
 		// TODO Auto-generated method stub
 		try {
-			statusModify.modifyStatus(ids,ZuelItemStatus.UpItem);
-			return ZuelResult.ok();
+			boolean isModified =statusModify.modifyStatus(ids,ZuelItemStatus.UpItem);
+			 if (isModified) { 
+	                ItemMessage itemMessage = new ItemMessage();
+	                itemMessage.setFlag("update");
+	                itemMessage.addId(ids);
+	                publisher.sendMessage(exchange, routingKey, itemMessage);
+	                return ZuelResult.ok();
+	            }
 		} catch (ServiceException e) {
 			// TODO: handle exception
 			e.getStackTrace();
 			throw new ServiceException("后台上架商品失效");
 		}
+		return ZuelResult.error();
 	}
 
 	@Override
@@ -199,7 +234,11 @@ public class TbItemServiceImpl implements TbItemManageService{
         itemParamItem.setUpdated(now);
         boolean isSaved = this.saveService.saveItem(item, itemDesc, itemParamItem);
 		if(isSaved){
-		    return ZuelResult.ok();
+			ItemMessage itemMessage = new ItemMessage();
+            itemMessage.setFlag("update");
+            itemMessage.addId(item.getId());
+            publisher.sendMessage(exchange, routingKey, itemMessage);
+            return ZuelResult.ok();
 		}
         return ZuelResult.error();
 	}

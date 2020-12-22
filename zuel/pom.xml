@@ -191,5 +191,6 @@
   	<module>zuel-message</module>
   	<module>zuel-message-provider</module>
   	<module>zuel-message-consumer</module>
+  	<module>zuel-search</module>
   </modules>
 </project>

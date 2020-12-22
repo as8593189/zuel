@@ -13,3 +13,8 @@ zuel:
         exchange: zuel_content_sync_ex
         routingKey: content_rk
         queueName: zuel_content_sync_queue
+    item:
+      sync:
+        exchange: zuel_item_sync_ex
+        routingKey: item_rk
+        queueName: zuel_item_sync_queue

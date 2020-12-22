@@ -302,4 +302,22 @@
       updated = #{updated,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByIds" resultType="com.zuel.common.vo.SearchItem">
+    select
+      item.id, item.title, item.sell_point as sellPoint, item.price, item.image,
+      itemCat.name as itemCatName, itemDesc.item_desc as description
+    from
+      tb_item item
+        left join
+      tb_item_cat itemCat
+        on item.cid = itemCat.id
+        left join
+      tb_item_desc itemDesc
+        on item.id = itemDesc.item_id
+    where
+      item.id in
+      <foreach collection="ids" open="(" close=")" separator="," item="id">
+        #{id}
+      </foreach>
+  </select>
 </mapper>
