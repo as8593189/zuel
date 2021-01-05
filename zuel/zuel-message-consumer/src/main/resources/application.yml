@@ -26,6 +26,12 @@ zuel:
         exchange: zuel_item_sync_ex
         routingKey: item_rk
         queueName: zuel_item_sync_queue
+  cache:
+    front:
+      item:
+        itemBased: zuel:front:item::getItemBySKU
+        itemDesc: zuel:front:item::getItemDescBySKU
+        itemParam: zuel:front:item::getItemParamBySKU
         
 dubbo:
   application:

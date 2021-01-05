@@ -10,3 +10,7 @@ dubbo:
 spring:
   profiles:
     active: redis
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
