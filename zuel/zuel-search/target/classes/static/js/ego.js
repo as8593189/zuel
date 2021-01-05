@@ -17,7 +17,7 @@ var TT = EGOU = {
 			success : function(data){
 				if(data.status == 200){
 					var username = data.data.username;
-					var html = username + "，欢迎来到易购！<a id='my_logout_id' href=\"http://localhost:8084/user/logout/"+_ticket+"\" class=\"link-logout\">[退出]</a>";
+					var html = username + "，欢迎来到财大电子商城！<a id='my_logout_id' href=\"http://localhost:8084/user/logout/"+_ticket+"\" class=\"link-logout\">[退出]</a>";
 					$("#loginbar").html(html);
 				}
 			}
@@ -45,7 +45,7 @@ $(function(){
 			// jsonpCallback:'abc',
 			success:function(data){
 				if(data.status==200){
-					$("#loginbar").html('您好！欢迎来到易购！<a href="javascript:login()">[登录]</a>&nbsp;<a href="javascript:regist()">[免费注册]</a>');
+					$("#loginbar").html('您好！欢迎来到财大电子商城！<a href="javascript:login()">[登录]</a>&nbsp;<a href="javascript:regist()">[免费注册]</a>');
 				}
 			}
 		});

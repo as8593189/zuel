@@ -67,6 +67,7 @@ public class ItemMessageConsumer {
         if("update".equals(itemMessage.getFlag())){
         	//同步更新
             List<SearchItem> list = service.getItemsByIds(itemMessage.getIds());
+            System.out.println("保存前腰");
             boolean isSaved = solrDao.save(list);
             // 定义计数器
             int index = 0;

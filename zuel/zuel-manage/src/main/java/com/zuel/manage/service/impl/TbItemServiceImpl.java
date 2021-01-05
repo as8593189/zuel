@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.zuel.common.vo.EasyUIDatagrid;
+import com.zuel.common.vo.ZuelIdUtil;
 import com.zuel.common.vo.ZuelItemStatus;
 import com.zuel.common.vo.ZuelPageResult;
 import com.zuel.common.vo.ZuelRandomId;
@@ -218,30 +219,40 @@ public class TbItemServiceImpl implements TbItemManageService{
 
 	@Override
 	public ZuelResult saveItem(TbItem item, String desc,String itemParams, Long itemParamId) throws ServiceException {
-		TbItemDesc itemDesc = new TbItemDesc();
-		TbItemParamItem itemParamItem = new TbItemParamItem();
-		Date now = new Date(System.currentTimeMillis()); 
-		if (null == item.getId()) { 
-		    item.setCreated(now); 
-		    itemDesc.setCreated(now); 
-		    itemParamItem.setCreated(now);
-		}
-		item.setUpdated(now); 
-		itemDesc.setItemDesc(desc); 
-		itemDesc.setUpdated(now); 
-		itemParamItem.setId(itemParamId);
-        itemParamItem.setParamData(itemParams); 
-        itemParamItem.setUpdated(now);
-        boolean isSaved = this.saveService.saveItem(item, itemDesc, itemParamItem);
-		if(isSaved){
-			ItemMessage itemMessage = new ItemMessage();
-            itemMessage.setFlag("update");
-            itemMessage.addId(item.getId());
-            publisher.sendMessage(exchange, routingKey, itemMessage);
-            return ZuelResult.ok();
-		}
+		try {
+            TbItemDesc itemDesc = new TbItemDesc();
+            TbItemParamItem itemParamItem = new TbItemParamItem();
+            Date now = new Date(); 
+            if (null == item.getId()) {
+                Long itemId = ZuelIdUtil.getId();
+                item.setId(itemId); 
+                itemDesc.setItemId(itemId); 
+                item.setCreated(now); 
+                itemDesc.setCreated(now); 
+                itemParamItem.setId(ZuelIdUtil.getId()); 
+                itemParamItem.setCreated(now); 
+            }
+            item.setUpdated(now); 
+            itemDesc.setItemDesc(desc); 
+            itemDesc.setUpdated(now);
+            itemParamItem.setId(itemParamId == null ? itemParamItem.getId() : itemParamId); 
+            itemParamItem.setParamData(itemParams); 
+            itemParamItem.setUpdated(now);
+            boolean isSaved = saveService.saveItem(item, itemDesc, itemParamItem);
+            if(isSaved){
+                ItemMessage itemMessage = new ItemMessage();
+                itemMessage.setFlag("update");
+                itemMessage.addId(item.getId());
+                publisher.sendMessage(exchange, routingKey, itemMessage);
+                return ZuelResult.ok();
+            }
+        }catch(ServiceException e){
+            e.printStackTrace();
+            throw e;
+        }
         return ZuelResult.error();
-	}
+    }
+	
 
 	
 }

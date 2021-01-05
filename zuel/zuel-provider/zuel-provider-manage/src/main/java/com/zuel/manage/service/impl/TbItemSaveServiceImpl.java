@@ -3,8 +3,6 @@ package com.zuel.manage.service.impl;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.zuel.common.vo.ZuelIdUtil;
 import com.zuel.exception.ServiceException;
 import com.zuel.manage.service.TbItemSaveProviderService;
 import com.zuel.mapper.TbItemDescMapper;
@@ -36,38 +34,30 @@ public class TbItemSaveServiceImpl implements TbItemSaveProviderService {
 	@Transactional(rollbackFor = {ServiceException.class})
 	public boolean saveItem(TbItem item, TbItemDesc itemDesc,TbItemParamItem itemParamItem) throws ServiceException {
 		// TODO Auto-generated method stub
-		 if(null == item.getId()) {
-	            Long itemId = ZuelIdUtil.getId();
-	            item.setId(itemId); 
-	            itemDesc.setItemId(itemId); 
-	            itemParamItem.setId(ZuelIdUtil.getId());
-	            itemParamItem.setItemId(itemId); 
-	            int itemUpdatedRows = itemMapper.insertSelective(item);
-	            if(itemUpdatedRows == 1){
-	                int itemDescUpdatedRows = deseMapper.insertSelective(itemDesc);
-	                if(itemDescUpdatedRows == 1){
-	                    int itemParamItemUpdatedRows = tbItemParamItemMapper.insertSelective(itemParamItem);
-	                    if(itemParamItemUpdatedRows == 1){
-	                        return true;
-	                    }
-	                }
-	            }
-	        } else {
-	            itemDesc.setItemId(item.getId());
-	            int itemUpdatedRows = itemMapper.updateByPrimaryKeySelective(item);
-	            if(itemUpdatedRows == 1){
-	                int itemDescUpdatedRows = deseMapper.updateByPrimaryKeySelective(itemDesc);
-	                if(itemDescUpdatedRows == 1) {
-	                    int itemParamItemUpdatedRows = tbItemParamItemMapper.updateByPrimaryKeySelective(itemParamItem);
-	                    if(itemParamItemUpdatedRows == 1){
-	                        return true;
-	                    }
-	                }
-	            }
-	        }
-	        throw new ServiceException("保存商品数据时，发生异常");
+		if(null != item.getCreated()) {
+            int itemUpdatedRows = itemMapper.insertSelective(item);
+            if(itemUpdatedRows == 1){
+                int itemDescUpdatedRows = deseMapper.insertSelective(itemDesc);
+                if(itemDescUpdatedRows == 1){
+                    int itemParamItemUpdatedRows = tbItemParamItemMapper.insertSelective(itemParamItem);
+                    if(itemParamItemUpdatedRows == 1){
+                        return true;
+                    }
+                }
+            }
+        } else {
+            itemDesc.setItemId(item.getId());
+            int itemUpdatedRows = itemMapper.updateByPrimaryKeySelective(item);
+            if(itemUpdatedRows == 1){
+                int itemDescUpdatedRows = deseMapper.updateByPrimaryKeySelective(itemDesc);
+                if(itemDescUpdatedRows == 1) {
+                    int itemParamItemUpdatedRows = tbItemParamItemMapper.updateByPrimaryKeySelective(itemParamItem);
+                    if(itemParamItemUpdatedRows == 1){
+                        return true;
+                    }
+                }
+            }
+        }
+        throw new ServiceException("保存商品数据时，发生异常");
 	}
-	
-	
-	
 }

@@ -29,6 +29,7 @@ public class SolrDaoImpl implements SolrDao {
 	@Override
 	public boolean save(List<SearchItem> list) {
 		// TODO Auto-generated method stub
+		System.out.println("集合"+list);
 		UpdateResponse response = solrTemplate.saveBeans("ego", list);
         // 提交事务
         solrTemplate.commit("ego");
