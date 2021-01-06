@@ -1,0 +1,14 @@
+server:
+  port: 8084
+dubbo:
+  registry:
+    address: zookeeper://192.168.10.10:2181
+  application:
+    name: zuel-front-passport
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  profiles:
+    active: redis
