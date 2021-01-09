@@ -21,16 +21,13 @@ public class ZuelItemShowObject extends TbItem{
 	 * 序列化
 	 */
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * 要保存的商品分类
 	 */
 	private List<TbItemCat> itemCats;
 	
-	
     public void setImages(String[] images){ }
     
-  
     public String[] getImages(){
         if(null == this.getImage() || "".equals(this.getImage())){
             return new String[]{};

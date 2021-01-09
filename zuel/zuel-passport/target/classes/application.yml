@@ -11,4 +11,4 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
   profiles:
-    active: redis
+    active: redis,cart

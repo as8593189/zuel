@@ -1,0 +1,7 @@
+zuel:
+  front:
+    cart:
+      cookie:
+        name: zuel_front_cart_cookieName 
+      redis:
+        keyPrefix: 'zuel:front:cart::'   

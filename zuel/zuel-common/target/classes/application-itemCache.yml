@@ -1,0 +1,7 @@
+zuel:
+  cache:
+    front:
+      item:
+        itemBased: zuel:front:item::getItemBySKU
+        itemDesc: zuel:front:item::getItemDescBySKU
+        itemParam: zuel:front:item::getItemParamBySKU

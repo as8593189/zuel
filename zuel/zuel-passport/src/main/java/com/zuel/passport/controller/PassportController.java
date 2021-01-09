@@ -1,14 +1,20 @@
 package com.zuel.passport.controller;
 
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zuel.common.vo.ZuelCookie;
 import com.zuel.common.vo.ZuelResult;
 import com.zuel.exception.ServiceException;
 import com.zuel.passport.service.PassportService;
@@ -25,19 +31,30 @@ public class PassportController {
 
 	@Autowired
     private PassportService passportService;
+	
+	
+    @Value("${zuel.front.cart.cookie.name}")
+    private String cartCookieName;
+    
+    
+    @Value("${zuel.front.cart.redis.keyPrefix}")
+    private String cartRedisKeyPrefix;
 
-
+   
     @PostMapping("/user/logout/{token}")
     @CrossOrigin(allowCredentials = "true")
-    public ZuelResult logout(@PathVariable("token") String token, HttpSession session){
+    public ZuelResult logout(@PathVariable("token") String token, HttpSession session, HttpServletRequest request, HttpServletResponse response){
         session.invalidate();
+        String tmpCartKey = cartRedisKeyPrefix + UUID.randomUUID().toString();
+        ZuelCookie.setCookie(request, response, cartCookieName, tmpCartKey, 60*60*24*365);
         return ZuelResult.ok();
     }
 
+    
     @GetMapping("/user/token/{token}")
     @CrossOrigin(allowCredentials = "true")
     public ZuelResult checkUserLogin(@PathVariable("token") String token, HttpSession session){
-        Object obj = session.getAttribute("egoLoginUser");
+        Object obj = session.getAttribute("zuelLoginUser");
         if(null != obj){ 
             TbUser user = (TbUser) obj;
             return ZuelResult.ok(user);
@@ -45,14 +62,14 @@ public class PassportController {
         return ZuelResult.error("用户未登录");
     }
 
-
+    
     @PostMapping("/user/login")
     public ZuelResult login(String username, String password, HttpSession session){
-        ZuelResult result = this.passportService.login(username, password, session);
+    	ZuelResult result = this.passportService.login(username, password, session);
         return result;
     }
 
-
+    
     @PostMapping("/user/register")
     public ZuelResult register(TbUser user, String pwdRepeat){
         int usernameLength = user.getUsername().trim().length();
@@ -81,13 +98,14 @@ public class PassportController {
             e.printStackTrace();
             result = ZuelResult.error("服务器忙，请稍后重试");
         }
-
         return result;
     }
+
 
     @GetMapping("/user/check/{principal}/{type}")
     public ZuelResult check(@PathVariable("principal") String principal, @PathVariable("type") int type){
-        ZuelResult result = passportService.check(principal, type);
+    	ZuelResult result = passportService.check(principal, type);
         return result;
     }
+
 }
